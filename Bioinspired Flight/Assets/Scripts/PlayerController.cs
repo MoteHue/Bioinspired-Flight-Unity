@@ -27,21 +27,11 @@ public class PlayerController : MonoBehaviour
         float x = joystick.Horizontal * horizontalAcceleration;
         float z = joystick.Vertical * horizontalAcceleration;
         float y = heightSlider.value * verticalAcceleration;
-        float rot = rotationSlider.value;
-        Quaternion rotation = Quaternion.Euler(0f, rot, 0f);
 
         rb.AddRelativeForce(new Vector3(x, y, z));
 
         rb.velocity = new Vector3(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -maxAscentSpeed, maxAscentSpeed),rb.velocity.z);
-        rb.MoveRotation(rotation);
-    }
-
-    private void OnCollisionEnter(Collision collision) {
-        
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        
+        transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
     }
 
 }

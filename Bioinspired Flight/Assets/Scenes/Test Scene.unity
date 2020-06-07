@@ -1571,7 +1571,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2034624369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,14 +1589,10 @@ MonoBehaviour:
   heightSlider: {fileID: 2066532951}
   rotationSlider: {fileID: 1091819972}
   gravity: 1
-  moveSpeed: 1
+  horizontalAcceleration: 2
+  maxMoveSpeed: 10
   rotationSpeed: 0.5
-  groundChecker: {fileID: 810796819}
-  groundDistance: 0.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 512
-  ascentSpeed: 10
+  verticalAcceleration: 5
   maxAscentSpeed: 10
 --- !u!1 &2039852599
 GameObject:
