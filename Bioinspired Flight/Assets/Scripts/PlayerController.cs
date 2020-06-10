@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -10,8 +11,10 @@ public class PlayerController : MonoBehaviour
     public Slider heightSlider;
     public Slider rotationSlider;
 
-    public float horizontalAcceleration = 2f;
+    public float horizontalAcceleration = 15f;
     public float rotationSpeed = 0.5f;
+
+    private float rotationAngle;
 
     private void Update() {
         // Receive force values 
@@ -19,9 +22,14 @@ public class PlayerController : MonoBehaviour
         float zForce = joystick.Vertical * horizontalAcceleration;
         float yForce = heightSlider.value * 9.81f;
 
-        GetComponent<ConstantForce>().force = new Vector3(xForce, yForce, zForce);
-
+        // Rotate
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
+        rotationAngle = transform.eulerAngles.y;
+
+        //Apply force
+        GetComponent<ConstantForce>().relativeForce = new Vector3(xForce, yForce, zForce);
+
+        
 
     }
 
