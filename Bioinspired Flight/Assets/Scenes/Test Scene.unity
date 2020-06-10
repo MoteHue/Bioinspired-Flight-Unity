@@ -348,7 +348,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281976592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -915,7 +915,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32baa5b7c7c4d5c478e4bb4de66c6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 2034624369}
   slider: {fileID: 1091819972}
 --- !u!114 &1091819972
 MonoBehaviour:
@@ -1468,7 +1467,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: f52acd2d8962f77428d9c61311c0951c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f52acd2d8962f77428d9c61311c0951c,
         type: 3}
@@ -1624,6 +1623,7 @@ GameObject:
   - component: {fileID: 2034624367}
   - component: {fileID: 2034624368}
   - component: {fileID: 2034624369}
+  - component: {fileID: 2034624370}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1658,9 +1658,9 @@ Rigidbody:
   m_GameObject: {fileID: 2034624366}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -1677,17 +1677,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95793cf88a2904897b00c2eb350b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2034624368}
   joystick: {fileID: 1511387517}
   heightSlider: {fileID: 2066532951}
   rotationSlider: {fileID: 1091819972}
-  gravity: 1
   horizontalAcceleration: 2
   maxMoveSpeed: 10
   rotationSpeed: 0.5
-  verticalAcceleration: 5
-  maxAscentSpeed: 10
-  velocityDebugView: {x: 0, y: 0, z: 0}
+--- !u!75 &2034624370
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034624366}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &2039852599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,9 +1947,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 775024032}
   m_Direction: 2
   m_MinValue: -1
-  m_MaxValue: 1
+  m_MaxValue: 3
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1958,7 +1965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32baa5b7c7c4d5c478e4bb4de66c6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 2034624369}
   slider: {fileID: 2066532951}
 --- !u!1001 &2114676061
 PrefabInstance:

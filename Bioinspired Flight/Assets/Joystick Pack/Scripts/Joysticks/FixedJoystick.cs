@@ -9,11 +9,9 @@ public class FixedJoystick : Joystick
 
     public override void OnPointerDown(PointerEventData eventData) {
         base.OnPointerDown(eventData);
-        playerController.NotifyJoystickIsHeld();
     }
 
     public override void OnPointerUp(PointerEventData eventData) {
         base.OnPointerUp(eventData);
-        playerController.NotifyJoystickReleased();
     }
 }
