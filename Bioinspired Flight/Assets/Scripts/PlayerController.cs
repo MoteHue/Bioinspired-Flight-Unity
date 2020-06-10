@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     public float horizontalAcceleration = 15f;
     public float rotationSpeed = 0.5f;
 
-    private float rotationAngle;
-
     private void Update() {
         // Receive force values 
         float xForce = joystick.Horizontal * horizontalAcceleration;
@@ -24,7 +22,6 @@ public class PlayerController : MonoBehaviour
 
         // Rotate
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
-        rotationAngle = transform.eulerAngles.y;
 
         //Apply force
         GetComponent<ConstantForce>().relativeForce = new Vector3(xForce, yForce, zForce);
