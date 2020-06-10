@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public Slider rotationSlider;
 
     public float horizontalAcceleration = 2f;
-    public float maxMoveSpeed = 10f;
     public float rotationSpeed = 0.5f;
 
     private void Update() {
@@ -20,9 +19,7 @@ public class PlayerController : MonoBehaviour
         float zForce = joystick.Vertical * horizontalAcceleration;
         float yForce = heightSlider.value * 9.81f;
 
-        GetComponent<Rigidbody>().AddRelativeForce(new Vector3(xForce, 0f, zForce));
-
-        GetComponent<ConstantForce>().force = new Vector3(0f, yForce, 0f);
+        GetComponent<ConstantForce>().force = new Vector3(xForce, yForce, zForce);
 
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
 
