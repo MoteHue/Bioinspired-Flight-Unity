@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -25,8 +26,6 @@ public class PlayerController : MonoBehaviour
 
         //Apply force
         GetComponent<ConstantForce>().relativeForce = new Vector3(xForce, yForce, zForce);
-
-        
 
     }
 
