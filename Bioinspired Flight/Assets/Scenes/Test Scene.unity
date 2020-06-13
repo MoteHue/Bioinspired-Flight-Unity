@@ -1665,6 +1665,7 @@ MonoBehaviour:
   heightSlider: {fileID: 2066532951}
   rotationSlider: {fileID: 1091819972}
   hitbox: {fileID: 281976593}
+  playerCamera: {fileID: 595550124}
   horizontalAcceleration: 15
   rotationSpeed: 0.5
   tiltSpeed: 0.5

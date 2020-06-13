@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Slider heightSlider;
     public Slider rotationSlider;
     public Transform hitbox;
+    public Camera playerCamera;
 
     public float horizontalAcceleration = 15f;
     public float rotationSpeed = 0.5f;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         }
         else rotateBackToUpright();
         hitbox.rotation = Quaternion.Euler(rotations);
+        playerCamera.transform.localPosition = new Vector3(-rotations.z / 20f, 3f, -8f + rotations.x / 20f);
 
     }
 
