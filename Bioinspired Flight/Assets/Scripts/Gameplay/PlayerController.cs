@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalAcceleration = 30f;
     public float rotationSpeed = 1f;
-    public float tiltSpeed = 1f;
+    public float tiltSpeed = 0.9f;
     public float tiltReturnSpeed = 0.5f;
     public float maxTilt = 15f;
     public float cameraSmoothSpeed = 10f;
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(-rotations.z / 20f, 3f, -8f + rotations.x / 20f), cameraSmoothSpeed * Time.deltaTime);
     }
 
+    #region Tilting
     void tilt() {
         if (joystickHeld) {
             float xRotation = rotations.x + joystick.Vertical * tiltSpeed;
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
         if (rotations.x < tiltReturnSpeed && rotations.x > -tiltReturnSpeed) rotations.x = 0f;
         if (rotations.z < tiltReturnSpeed && rotations.z > -tiltReturnSpeed) rotations.z = 0f;
     }
+    #endregion
 
     public void setJoystickHeld(bool b) {
         joystickHeld = b;
