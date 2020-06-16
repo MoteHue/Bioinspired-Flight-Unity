@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     public Transform hitbox;
     public Camera playerCamera;
 
-    public float horizontalAcceleration = 15f;
-    public float rotationSpeed = 0.5f;
-    public float tiltSpeed = 0.1f;
-    public float maxTilt = 20f;
+    public float horizontalAcceleration = 30f;
+    public float rotationSpeed = 1f;
+    public float tiltSpeed = 1f;
+    public float tiltReturnSpeed = 0.5f;
+    public float maxTilt = 15f;
 
     private bool joystickHeld;
     private Vector3 rotations;
@@ -72,16 +73,20 @@ public class PlayerController : MonoBehaviour
     void rotateBackToUpright() {
         rotations = rotations.Round(1);
         // x axis
-        if (rotations.x != 0) {
-            if (rotations.x < 0) rotations.x += 0.2f;
-            else rotations.x -= 0.2f;
+        if (rotations.x != 0f) {
+            if (rotations.x < 0f) rotations.x += tiltReturnSpeed;
+            else rotations.x -= tiltReturnSpeed;
         }
 
         // z axis
-        if (rotations.z != 0) {
-            if (rotations.z < 0) rotations.z += 0.2f;
-            else rotations.z -= 0.2f;
+        if (rotations.z != 0f) {
+            if (rotations.z < 0f) rotations.z += tiltReturnSpeed;
+            else rotations.z -= tiltReturnSpeed;
         }
+
+        // Set to zero if close (possibly floating point precision error?)
+        if (rotations.x < tiltReturnSpeed && rotations.x > -tiltReturnSpeed) rotations.x = 0f;
+        if (rotations.z < tiltReturnSpeed && rotations.z > -tiltReturnSpeed) rotations.z = 0f;
     }
 
     public void setJoystickHeld(bool b) {
