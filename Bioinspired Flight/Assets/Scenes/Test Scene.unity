@@ -159,6 +159,11 @@ PrefabInstance:
       propertyPath: tiltReturnSpeed
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1929358455073034061, guid: 23ad643014a5b4048bb00756b6fee603,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1929358455073034066, guid: 23ad643014a5b4048bb00756b6fee603,
         type: 3}
       propertyPath: m_LocalPosition.x

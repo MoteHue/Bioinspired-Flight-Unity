@@ -5,15 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExtensionsMethods;
 using System.Net.Sockets;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("GameObjects")]
     public Joystick joystick;
     public Slider heightSlider;
     public Slider rotationSlider;
     public Transform hitbox;
     public Camera playerCamera;
 
+    [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
     public float rotationSpeed = 1f;
     public float tiltSpeed = 90f;
