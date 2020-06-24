@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Slider rotationSlider;
     public Transform hitbox;
     public Camera playerCamera;
+    public PropellerBehaviour[] props;
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
@@ -39,6 +40,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() { // Called a set number of times per second (separate from framerate)
+        // Manage propeller rotations;
+        foreach (PropellerBehaviour prop in props) {
+            prop.setRotationSpeed(heightSlider.value + 1);
+        }
+
         // Apply force
         GetComponent<ConstantForce>().relativeForce = forces;
 
