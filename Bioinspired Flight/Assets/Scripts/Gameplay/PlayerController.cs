@@ -40,10 +40,44 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() { // Called a set number of times per second (separate from framerate)
-        // Manage propeller rotations;
-        foreach (PropellerBehaviour prop in props) {
-            prop.setRotationSpeed(heightSlider.value + 1);
+        #region Propeller rotations
+        float[] rotSpeeds = new float[4];
+
+        // Height slider
+        for (int i = 0; i < props.Length; i++) {
+            rotSpeeds[i] += heightSlider.value + 1;
         }
+
+        // Rotation slider
+        if (rotationSlider.value > 0) { 
+            rotSpeeds[0] += 2f * rotationSlider.value;
+            rotSpeeds[3] += 2f * rotationSlider.value;
+        } else if (rotationSlider.value < 0) {
+            rotSpeeds[1] += 2f * -rotationSlider.value;
+            rotSpeeds[2] += 2f * -rotationSlider.value;
+        }
+
+        // Joystick
+        if (joystick.Horizontal > 0) {
+            rotSpeeds[0] += 2f * joystick.Horizontal;
+            rotSpeeds[2] += 2f * joystick.Horizontal;
+        } else if (joystick.Horizontal < 0) {
+            rotSpeeds[1] += 2f * -joystick.Horizontal;
+            rotSpeeds[3] += 2f * -joystick.Horizontal;
+        }
+        if (joystick.Vertical > 0) {
+            rotSpeeds[2] += 2f * joystick.Vertical;
+            rotSpeeds[3] += 2f * joystick.Vertical;
+        } else if (joystick.Vertical < 0) {
+            rotSpeeds[0] += 2f * -joystick.Vertical;
+            rotSpeeds[1] += 2f * -joystick.Vertical;
+        }
+
+        // Apply rotations
+        for (int i = 0; i < props.Length; i++) {
+            props[i].setRotationSpeed(rotSpeeds[i]);
+        }
+        #endregion
 
         // Apply force
         GetComponent<ConstantForce>().relativeForce = forces;
