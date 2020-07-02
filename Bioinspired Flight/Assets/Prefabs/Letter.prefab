@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5249776192188867669}
-  - component: {fileID: 5010236261684818357}
+  - component: {fileID: 3680993805586548451}
+  - component: {fileID: 7204552334904436992}
   m_Layer: 0
   m_Name: Letter
-  m_TagString: Untagged
+  m_TagString: Letter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 270, y: 180, z: 90}
---- !u!114 &5010236261684818357
+--- !u!114 &3680993805586548451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,13 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4c5602d49e9544090c4898ba261ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &5807292968962197726
+  state: 0
+--- !u!65 &7204552334904436992
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8547741700091091366}
+  m_GameObject: {fileID: 6204226709479663195}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -129,12 +131,6 @@ PrefabInstance:
 --- !u!4 &1078050219804995325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 386df359198051c4f8e25db65fe68645,
-    type: 3}
-  m_PrefabInstance: {fileID: 683625254118967574}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8547741700091091366 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8140499575222096, guid: 386df359198051c4f8e25db65fe68645,
     type: 3}
   m_PrefabInstance: {fileID: 683625254118967574}
   m_PrefabAsset: {fileID: 0}

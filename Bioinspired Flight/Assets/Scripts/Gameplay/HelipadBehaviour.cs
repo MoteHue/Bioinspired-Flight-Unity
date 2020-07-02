@@ -4,34 +4,32 @@ using UnityEngine;
 
 public class HelipadBehaviour : MonoBehaviour
 {
-
-    int collectedLoopCount;
-    List<GameObject> loops;
+    List<GameObject> uncollectedLoops;
 
     // Start is called before the first frame update
     void Start() {
-        loops = GameObject.FindGameObjectsWithTag("Loop").ToList<GameObject>();
-        if (loops.Count == 0) {
+        uncollectedLoops = GameObject.FindGameObjectsWithTag("Loop").ToList();
+        if (uncollectedLoops.Count == 0) {
             Debug.Log("Helipad is present without any loops.");
         } else {
-            for (int i = 0; i < loops.Count; i++) {
-                if (loops[i].GetComponent<LoopBehaviour>().id != 0) {
-                    loops[i].SetActive(false);
+            for (int i = 0; i < uncollectedLoops.Count; i++) {
+                if (uncollectedLoops[i].GetComponent<LoopBehaviour>().id != 0) {
+                    uncollectedLoops[i].SetActive(false);
                 }
             }
         }
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Player") && collectedLoopCount == loops.Count) {
+        if (collision.gameObject.CompareTag("Player") && uncollectedLoops.Count == 0) {
             Debug.Log("Level complete");
         }
     }
 
-    public void informLoopCollected() {
-        collectedLoopCount += 1;
-        foreach (GameObject loop in loops) {
-            if (loop.GetComponent<LoopBehaviour>().id == collectedLoopCount) {
+    public void informLoopCollected(GameObject collectedLoop) {
+        uncollectedLoops.Remove(collectedLoop);
+        foreach (GameObject loop in uncollectedLoops) {
+            if (loop.GetComponent<LoopBehaviour>().id == collectedLoop.GetComponent<LoopBehaviour>().id + 1) {
                 loop.SetActive(true);
             }
         }
