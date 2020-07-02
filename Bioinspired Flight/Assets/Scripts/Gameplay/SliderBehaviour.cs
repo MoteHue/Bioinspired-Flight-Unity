@@ -16,8 +16,4 @@ public class SliderBehaviour : MonoBehaviour, IEndDragHandler
         slider.value = defaultValue;
     }
 
-    private void FixedUpdate() {
-        
-    }
-
 }
