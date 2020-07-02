@@ -6,7 +6,6 @@ public class HelipadBehaviour : MonoBehaviour
 {
     List<GameObject> uncollectedLoops;
 
-    // Start is called before the first frame update
     void Start() {
         uncollectedLoops = GameObject.FindGameObjectsWithTag("Loop").ToList();
         if (uncollectedLoops.Count == 0) {
