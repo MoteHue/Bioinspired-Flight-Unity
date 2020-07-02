@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
         } else {
             UnityEngine.Debug.Log("You've done this before, you'll be fine.");
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene( 2 );
     }
 
     public void QuitGame() {
