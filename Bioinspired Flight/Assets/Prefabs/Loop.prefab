@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1551124511714979551}
   - component: {fileID: 1551124511714979550}
   - component: {fileID: 1551124511714979548}
-  - component: {fileID: 1832833622374278511}
   - component: {fileID: 8704706264180263300}
+  - component: {fileID: 198980221017137146}
   m_Layer: 0
   m_Name: Loop
   m_TagString: Loop
@@ -97,19 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helipad: {fileID: 0}
   id: 0
---- !u!65 &1832833622374278511
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551124511714979539}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2.0000005, z: 1.0000005}
-  m_Center: {x: 0.000000059604645, y: 4.065758e-20, z: -0.00000008940699}
 --- !u!95 &8704706264180263300
 Animator:
   serializedVersion: 3
@@ -129,6 +116,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &198980221017137146
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551124511714979539}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &849688813991792961
 PrefabInstance:
   m_ObjectHideFlags: 0
