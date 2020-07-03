@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using ExtensionsMethods;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,21 +15,34 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
+    public float verticalAcceleration = 2f;
+    public float fallSpeed = 3f;
     public float rotationSpeed = 1f;
     public float tiltSpeed = 90f;
     public float tiltReturnSpeed = 30f;
     public float maxTilt = 15f;
     public float cameraSmoothSpeed = 10f;
 
+    Rigidbody rb;
     bool joystickHeld;
     Vector3 hitboxRotations;
     Vector3 forces;
 
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void Update() { // Called once per frame
         // Receive joystick and slider values 
         forces.x = joystick.Horizontal * horizontalAcceleration;
-        forces.y = heightSlider.value * 9.81f;
+        forces.y = heightSlider.value * 9.81f * rb.mass;
         forces.z = joystick.Vertical * horizontalAcceleration;
+
+        if (forces.y > 9.81f * rb.mass) {
+            forces.y *= verticalAcceleration;
+        } else if (forces.y < 0f) {
+            forces.y *= fallSpeed;
+        }
 
         // Rotate player
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
