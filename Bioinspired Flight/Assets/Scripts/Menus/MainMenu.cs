@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private SaveData achievementData;
     private SaveData loadoutData;
+    private bool[] loadoutArray = new bool[2];
 
     void Awake(){
         achievementData = new SaveData("Achievements.save");
