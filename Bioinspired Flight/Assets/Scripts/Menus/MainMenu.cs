@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private CustomizationMenu customizationMenu;
+
+
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray = new bool[2];
@@ -15,6 +18,21 @@ public class MainMenu : MonoBehaviour
         achievementData.Load();
         loadoutData = new SaveData("Loadout.save");
         loadoutData.Load();
+    }
+
+    public SaveData getAchievementSave()
+    {
+        return achievementData;
+    }
+
+    public SaveData GetLoadoutSave()
+    {
+        return loadoutData;
+    }
+
+    public bool[] getLoadoutArray()
+    {
+        return loadoutArray;
     }
 
     public void PlayGame() {
@@ -42,13 +60,15 @@ public class MainMenu : MonoBehaviour
     // previously saved Loadout.save
     public void Customizations()
     {
+        customizationMenu = GameObject.FindObjectOfType<CustomizationMenu>();
         bool firstLoadout = false;
-        bool[] loadoutArray = new bool[2];
         if (loadoutData.data.ContainsKey("Loadout")){
             firstLoadout = loadoutData.data["Loadout"];
+            loadoutData.Save();
             loadoutArray[0] = loadoutData.data["Feathers"];
             loadoutArray[1] = loadoutData.data["Turtle"];
-            UnityEngine.Debug.Log("Made your last saved loadout");
+            UnityEngine.Debug.Log(loadoutArray[0]);
+            UnityEngine.Debug.Log(loadoutArray[1]);
         }
 
         // First loadout
@@ -65,28 +85,10 @@ public class MainMenu : MonoBehaviour
 
             UnityEngine.Debug.Log("Loadouts created at lvl4");
         }
-        else
-        {
-            UnityEngine.Debug.Log("Loadout already there");
-            UnityEngine.Debug.Log(loadoutArray[0]);
-            UnityEngine.Debug.Log(loadoutArray[1]);
-        }
+
+        customizationMenu.openMenu(achievementData, loadoutData, loadoutArray);
     }
 
-    // Used to test whether you can freely change loadout values
-    // whilst having it update in customizations
-    public void testChangeLoadout()
-    {
-        UnityEngine.Debug.Log("Fine I'll give you feathers");
-        loadoutData.data["Feathers"] = true;
-        if (loadoutData.data["Feathers"])
-        {
-            UnityEngine.Debug.Log("So it changes even without saving but it worked");
-        }
-
-        loadoutData.Save();
-
-    }
     public void QuitGame() {
         Debug.Log("Quit!");
         Application.Quit();

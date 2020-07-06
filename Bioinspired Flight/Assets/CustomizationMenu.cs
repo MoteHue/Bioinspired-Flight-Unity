@@ -1,48 +1,47 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 public class CustomizationMenu : MonoBehaviour
 {
-
     private SaveData achievementData;
     private SaveData loadoutData;
-    private bool[] loadoutArray = new bool[2];
+    private bool[] loadoutArray;
 
-    void Awake()
+    public void openMenu(SaveData rAchievementData, SaveData rLoadoutData, bool[] rLoadoutArray)
     {
-        achievementData = new SaveData("Achievements.save");
-        achievementData.Load();
-        loadoutData = new SaveData("Loadout.save");
-        loadoutData.Load();
+        achievementData = rAchievementData;
+        loadoutData = rLoadoutData;
+        loadoutArray = rLoadoutArray;
     }
 
     public void toggleFeather()
     {
         bool featherStatus = loadoutData.data["Feathers"];
-
+        UnityEngine.Debug.Log("Changing Feather from");
+        UnityEngine.Debug.Log(featherStatus);
+        UnityEngine.Debug.Log("To:");
         if (featherStatus)
         {
-            UnityEngine.Debug.Log("Feathers are true");
             loadoutData.data["Feathers"] = false;
             featherStatus = loadoutData.data["Feathers"];
-            UnityEngine.Debug.Log("Now they are:");
-            UnityEngine.Debug.Log(featherStatus);
+            loadoutArray[0] = featherStatus;
 
         }
         else
         {
-            UnityEngine.Debug.Log("Feathers are false");
             loadoutData.data["Feathers"] = true;
             featherStatus = loadoutData.data["Feathers"];
-            UnityEngine.Debug.Log("Now they are:");
-            UnityEngine.Debug.Log(featherStatus);
+            loadoutArray[0] = featherStatus;
         }
+        UnityEngine.Debug.Log(featherStatus);
+        UnityEngine.Debug.Log("Saving feather change");
         loadoutData.Save();
-
     }
 
     public void toggleTurtle()
@@ -51,23 +50,29 @@ public class CustomizationMenu : MonoBehaviour
 
         if (turtleStatus)
         {
-            UnityEngine.Debug.Log("Turtle are true");
             loadoutData.data["Turtle"] = false;
             turtleStatus = loadoutData.data["Turtle"];
-            UnityEngine.Debug.Log("Now they are:");
-            UnityEngine.Debug.Log(turtleStatus);
+            loadoutArray[1] = turtleStatus;
         }
         else
         {
-            UnityEngine.Debug.Log("Turtle are false");
             loadoutData.data["Turtle"] = true;
             turtleStatus = loadoutData.data["Turtle"];
-            UnityEngine.Debug.Log("Now they are:");
-            UnityEngine.Debug.Log(turtleStatus);
+            loadoutArray[1] = turtleStatus;
         }
         loadoutData.Save();
-
+        UnityEngine.Debug.Log("Loadout now:");
+        UnityEngine.Debug.Log(loadoutArray[0]);
+        UnityEngine.Debug.Log(loadoutArray[1]);
     }
+    
+    public void checkLoadout()
+    {
+        UnityEngine.Debug.Log(loadoutArray[0]);
+        UnityEngine.Debug.Log(loadoutArray[1]);
+    }
+
+  
 }
 
 
