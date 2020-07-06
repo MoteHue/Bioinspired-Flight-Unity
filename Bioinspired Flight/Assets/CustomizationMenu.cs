@@ -12,12 +12,13 @@ public class CustomizationMenu : MonoBehaviour
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray;
-
+    private GameObject dronePreview;
     public void openMenu(SaveData rAchievementData, SaveData rLoadoutData, bool[] rLoadoutArray)
     {
         achievementData = rAchievementData;
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
+
     }
 
     public void toggleFeather()

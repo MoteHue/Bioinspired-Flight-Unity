@@ -7,6 +7,10 @@ TagManager:
   - Loop
   - Letter
   - Attachment1
+  - Attachment2
+  - Attachment3
+  - Attachment4
+  - DroneModel
   layers:
   - Default
   - TransparentFX
