@@ -40,32 +40,34 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArray[0] = featherStatus;
         }
         UnityEngine.Debug.Log(featherStatus);
-        UnityEngine.Debug.Log("Saving feather change");
+        UnityEngine.Debug.Log("Saving Feather change");
         loadoutData.Save();
     }
 
     public void toggleTurtle()
     {
         bool turtleStatus = loadoutData.data["Turtle"];
-
+        UnityEngine.Debug.Log("Changing Turtle from");
+        UnityEngine.Debug.Log(turtleStatus);
+        UnityEngine.Debug.Log("To:");
         if (turtleStatus)
         {
             loadoutData.data["Turtle"] = false;
             turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[1] = turtleStatus;
+            loadoutArray[0] = turtleStatus;
+
         }
         else
         {
             loadoutData.data["Turtle"] = true;
             turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[1] = turtleStatus;
+            loadoutArray[0] = turtleStatus;
         }
+        UnityEngine.Debug.Log(turtleStatus);
+        UnityEngine.Debug.Log("Saving Turtle change");
         loadoutData.Save();
-        UnityEngine.Debug.Log("Loadout now:");
-        UnityEngine.Debug.Log(loadoutArray[0]);
-        UnityEngine.Debug.Log(loadoutArray[1]);
     }
-    
+
     public void checkLoadout()
     {
         UnityEngine.Debug.Log(loadoutArray[0]);
