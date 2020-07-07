@@ -23,6 +23,16 @@ public class PlayerController : MonoBehaviour
     public float maxTilt = 15f;
     public float cameraSmoothSpeed = 10f;
 
+    [Header("Customisations")]
+    public bool airSensorEnabled;
+    public GameObject airSensor;
+    public bool electricalSensorEnabled;
+    public GameObject electricalSensor;
+    public bool softRoboticsGripperEnabled;
+    public GameObject softRoboticsGripper;
+    public bool magnetometerEnabled;
+    public GameObject magnetometer;
+
     Rigidbody rb;
     bool joystickHeld;
     Vector3 hitboxRotations;
@@ -30,6 +40,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        if (airSensorEnabled) { airSensor.SetActive(true); }
+        if (electricalSensorEnabled) { electricalSensor.SetActive(true); }
+        if (softRoboticsGripperEnabled) { softRoboticsGripper.SetActive(true); }
+        if (magnetometerEnabled) { magnetometer.SetActive(true); }
     }
 
     private void Update() { // Called once per frame
@@ -152,5 +166,3 @@ public class PlayerController : MonoBehaviour
     }
 
 }
-
-
