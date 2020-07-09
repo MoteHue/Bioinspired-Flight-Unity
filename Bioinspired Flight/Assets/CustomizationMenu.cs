@@ -82,13 +82,67 @@ public class CustomizationMenu : MonoBehaviour
         turtleModel.GetComponent<MeshRenderer>().enabled = loadoutArray[1];
     }
 
+    public void toggleHammerhead()
+    {
+        bool hammerheadStatus = loadoutData.data["Hammerhead"];
+        UnityEngine.Debug.Log("Changing Hammerhead from");
+        UnityEngine.Debug.Log(hammerheadStatus);
+        UnityEngine.Debug.Log("To:");
+        if (hammerheadStatus)
+        {
+            loadoutData.data["Hammerhead"] = false;
+            hammerheadStatus = loadoutData.data["Hammerhead"];
+            loadoutArray[2] = hammerheadStatus;
+
+        }
+        else
+        {
+            loadoutData.data["Hammerhead"] = true;
+            hammerheadStatus = loadoutData.data["Hammerhead"];
+            loadoutArray[2] = hammerheadStatus;
+        }
+        UnityEngine.Debug.Log(hammerheadStatus);
+        UnityEngine.Debug.Log("Saving Hammerhead change");
+        loadoutData.Save();
+        hammerheadModel.GetComponent<MeshRenderer>().enabled = loadoutArray[2];
+    }
+
+    public void toggleOctopus()
+    {
+        bool octopusStatus = loadoutData.data["Octopus"];
+        UnityEngine.Debug.Log("Changing Octopus from");
+        UnityEngine.Debug.Log(octopusStatus);
+        UnityEngine.Debug.Log("To:");
+        if (octopusStatus)
+        {
+            loadoutData.data["Octopus"] = false;
+            octopusStatus = loadoutData.data["Octopus"];
+            loadoutArray[3] = octopusStatus;
+
+        }
+        else
+        {
+            loadoutData.data["Octopus"] = true;
+            octopusStatus = loadoutData.data["Octopus"];
+            loadoutArray[3] = octopusStatus;
+        }
+        UnityEngine.Debug.Log(octopusStatus);
+        UnityEngine.Debug.Log("Saving Octopus change");
+        loadoutData.Save();
+        octopusModel.GetComponent<MeshRenderer>().enabled = loadoutArray[3];
+    }
+
+
     public void checkLoadout()
     {
         UnityEngine.Debug.Log(loadoutArray[0]);
         UnityEngine.Debug.Log(loadoutArray[1]);
+        UnityEngine.Debug.Log(loadoutArray[2]);
+        UnityEngine.Debug.Log(loadoutArray[3]);
+
     }
 
-  
+
 }
 
 

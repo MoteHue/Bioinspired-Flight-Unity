@@ -11,14 +11,14 @@ public class MainMenu : MonoBehaviour
 
     private SaveData achievementData;
     private SaveData loadoutData;
-    private bool[] loadoutArray = new bool[2];
-
+    private bool[] loadoutArray;
     void Awake(){
         achievementData = new SaveData("Achievements.save");
         achievementData.Load();
         loadoutData = new SaveData("Loadout.save");
         loadoutData.Load();
-    }
+        loadoutArray = new bool[4];
+}
 
     public SaveData getAchievementSave()
     {
@@ -67,8 +67,12 @@ public class MainMenu : MonoBehaviour
             loadoutData.Save();
             loadoutArray[0] = loadoutData.data["Feathers"];
             loadoutArray[1] = loadoutData.data["Turtle"];
+            loadoutArray[2] = loadoutData.data["Hammerhead"];
+            loadoutArray[3] = loadoutData.data["Octopus"];
             UnityEngine.Debug.Log(loadoutArray[0]);
             UnityEngine.Debug.Log(loadoutArray[1]);
+            UnityEngine.Debug.Log(loadoutArray[2]);
+            UnityEngine.Debug.Log(loadoutArray[3]);
         }
 
         // First loadout
@@ -78,7 +82,9 @@ public class MainMenu : MonoBehaviour
             loadoutData.data["Loadout"] = true;
             // Default loadout
             loadoutData.data["Feathers"] = false;
-            loadoutData.data["Turtle"] = true;
+            loadoutData.data["Turtle"] = false;
+            loadoutData.data["Hammerhead"] = false;
+            loadoutData.data["Octopus"] = false;
 
             // Save intitial loadout
             loadoutData.Save();
