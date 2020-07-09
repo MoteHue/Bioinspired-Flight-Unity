@@ -13,16 +13,26 @@ public class CustomizationMenu : MonoBehaviour
     private SaveData loadoutData;
     private bool[] loadoutArray;
     private GameObject dronePreview;
+    private GameObject featherModel;
+    private GameObject turtleModel;
+    private GameObject hammerheadModel;
+    private GameObject octopusModel;
+
     public void openMenu(SaveData rAchievementData, SaveData rLoadoutData, bool[] rLoadoutArray)
     {
         achievementData = rAchievementData;
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
-
+        dronePreview = GameObject.Find("allAttachmentDroneTilt");
+        featherModel = GameObject.Find("seagull_sensor");
+        turtleModel = GameObject.Find("turtle_sensor");
+        hammerheadModel = GameObject.Find("hammerhead_sensor");
+        octopusModel = GameObject.Find("octopus_sensor");
     }
 
     public void toggleFeather()
     {
+        
         bool featherStatus = loadoutData.data["Feathers"];
         UnityEngine.Debug.Log("Changing Feather from");
         UnityEngine.Debug.Log(featherStatus);
@@ -42,7 +52,9 @@ public class CustomizationMenu : MonoBehaviour
         }
         UnityEngine.Debug.Log(featherStatus);
         UnityEngine.Debug.Log("Saving Feather change");
+    
         loadoutData.Save();
+        featherModel.GetComponent<MeshRenderer>().enabled = loadoutArray[0];
     }
 
     public void toggleTurtle()
@@ -55,18 +67,19 @@ public class CustomizationMenu : MonoBehaviour
         {
             loadoutData.data["Turtle"] = false;
             turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[0] = turtleStatus;
+            loadoutArray[1] = turtleStatus;
 
         }
         else
         {
             loadoutData.data["Turtle"] = true;
             turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[0] = turtleStatus;
+            loadoutArray[1] = turtleStatus;
         }
         UnityEngine.Debug.Log(turtleStatus);
         UnityEngine.Debug.Log("Saving Turtle change");
         loadoutData.Save();
+        turtleModel.GetComponent<MeshRenderer>().enabled = loadoutArray[1];
     }
 
     public void checkLoadout()
