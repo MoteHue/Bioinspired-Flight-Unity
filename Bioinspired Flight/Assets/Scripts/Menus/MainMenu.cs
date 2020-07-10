@@ -1,24 +1,41 @@
-﻿using System.Collections;
+﻿using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     private CustomizationMenu customizationMenu;
-
-
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray;
+
+    private bool playButtonActive;
+    private GameObject customizationButton;
+    private GameObject achievementButton;
+    private GameObject settingsButton;
+    private GameObject quitButton;
+    private GameObject levelSelectMenu;
+    private GameObject playButton;
+
     void Awake(){
         achievementData = new SaveData("Achievements.save");
         achievementData.Load();
         loadoutData = new SaveData("Loadout.save");
         loadoutData.Load();
         loadoutArray = new bool[4];
-}
+        playButtonActive = false;
+        playButton = GameObject.Find("playButton");
+        customizationButton = GameObject.Find("customizationButton");
+        achievementButton = GameObject.Find("achievementsButton");
+        settingsButton = GameObject.Find("settingsButton");
+        quitButton = GameObject.Find("quitButton");
+        levelSelectMenu = playButton.transform.Find("LevelSelectBorder").gameObject;
+                
+    }
 
     public SaveData getAchievementSave()
     {
@@ -52,6 +69,39 @@ public class MainMenu : MonoBehaviour
 
         }
         SceneManager.LoadScene( 2 );
+    }
+
+    public void LevelSelectOpen()
+    {
+        if (playButtonActive)
+        {
+            UnityEngine.Debug.LogError("Level Select shouldn't be open....... BROKEN");
+        }
+
+        playButtonActive = true;
+
+        customizationButton.SetActive(false);
+        achievementButton.SetActive(false);
+        settingsButton.SetActive(false);
+        quitButton.SetActive(false);
+        levelSelectMenu.SetActive(true);
+    }
+
+    public void LevelSelectClose()
+    {
+        if (!playButtonActive)
+        {
+            UnityEngine.Debug.LogError("Level Select should be open....... BROKEN");
+        }
+
+        playButtonActive = false;
+
+        customizationButton.SetActive(true);
+        achievementButton.SetActive(true);
+        settingsButton.SetActive(true);
+        quitButton.SetActive(true);
+        levelSelectMenu.SetActive(false);
+
     }
 
     // When Customizations is pressed:
