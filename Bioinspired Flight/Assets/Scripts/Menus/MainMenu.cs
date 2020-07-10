@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray;
+    private CameraController cameraController;
 
     private bool playButtonActive;
     private GameObject customizationButton;
@@ -20,6 +22,7 @@ public class MainMenu : MonoBehaviour
     private GameObject quitButton;
     private GameObject levelSelectMenu;
     private GameObject playButton;
+    private int activeMenu;
 
     void Awake(){
         achievementData = new SaveData("Achievements.save");
@@ -34,7 +37,8 @@ public class MainMenu : MonoBehaviour
         settingsButton = GameObject.Find("settingsButton");
         quitButton = GameObject.Find("quitButton");
         levelSelectMenu = playButton.transform.Find("LevelSelectBorder").gameObject;
-                
+        activeMenu = 0;
+        cameraController = FindObjectOfType<CameraController>();
     }
 
     public SaveData getAchievementSave()
@@ -110,6 +114,7 @@ public class MainMenu : MonoBehaviour
     // previously saved Loadout.save
     public void Customizations()
     {
+        activeMenu = 1;
         customizationMenu = GameObject.FindObjectOfType<CustomizationMenu>();
         bool firstLoadout = false;
         if (loadoutData.data.ContainsKey("Loadout")){
@@ -141,8 +146,27 @@ public class MainMenu : MonoBehaviour
 
             UnityEngine.Debug.Log("Loadouts created at lvl4");
         }
+        cameraController.updateView(activeMenu);
 
         customizationMenu.openMenu(achievementData, loadoutData, loadoutArray);
+    }
+
+    public void Achievements()
+    {
+        activeMenu = 2;
+        cameraController.updateView(activeMenu);
+    }
+
+    public void Settings()
+    {
+        activeMenu = 3;
+        cameraController.updateView(activeMenu);
+    }
+
+    public void returnToMain()
+    {
+        activeMenu = 0;
+        cameraController.updateView(activeMenu);
     }
 
     public void QuitGame() {
