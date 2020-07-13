@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Transform hitbox;
     public Camera playerCamera;
     public PropellerBehaviour[] props;
+    public Slider fuelGague;
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public float tiltReturnSpeed = 30f;
     public float maxTilt = 15f;
     public float cameraSmoothSpeed = 10f;
+    public float maxFuelLevel = 100f;
+    public float fuelLossSpeed = 5f;
 
     [Header("Customisations")]
     public bool airSensorEnabled;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
     bool joystickHeld;
     Vector3 hitboxRotations;
     Vector3 forces;
+    float fuelLevel = 100f;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -60,6 +64,10 @@ public class PlayerController : MonoBehaviour
 
         // Rotate player
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
+
+        if (joystickHeld || heightSlider.value > -1) {
+            fuelLevel -= fuelLossSpeed * Time.deltaTime;
+        }
     }
 
     private void FixedUpdate() { // Called a set number of times per second (separate from framerate)
@@ -110,6 +118,12 @@ public class PlayerController : MonoBehaviour
 
         // Offset the camera with the tilt
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(-hitboxRotations.z / 20f, 3f, -8f + hitboxRotations.x / 20f), cameraSmoothSpeed * Time.deltaTime);
+    }
+    private void LateUpdate() {
+        fuelGague.value = fuelLevel;
+        if (fuelLevel <= 0) {
+            Debug.Log("Game Over, out of fuel!");
+        }
     }
 
     #region Tilting
@@ -163,6 +177,10 @@ public class PlayerController : MonoBehaviour
 
     public void setJoystickHeld(bool b) {
         joystickHeld = b;
+    }
+
+    public void informFuelCollected() {
+        fuelLevel = maxFuelLevel;
     }
 
 }
