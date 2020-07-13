@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using ExtensionsMethods;
 using UnityEngine.Rendering;
+using Boo.Lang;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Transform hitbox;
     public Camera playerCamera;
     public PropellerBehaviour[] props;
-    public Slider fuelGague;
+    public GameObject fuelGague;
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     Vector3 hitboxRotations;
     Vector3 forces;
     float fuelLevel = 100f;
+    GameObject[] fuels;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
         if (electricalSensorEnabled) { electricalSensor.SetActive(true); }
         if (softRoboticsGripperEnabled) { softRoboticsGripper.SetActive(true); }
         if (magnetometerEnabled) { magnetometer.SetActive(true); }
+        fuels = GameObject.FindGameObjectsWithTag("Fuel");
+        if (fuels.Count() == 0) { fuelGague.gameObject.SetActive(false); }
     }
 
     private void Update() { // Called once per frame
@@ -65,7 +70,7 @@ public class PlayerController : MonoBehaviour
         // Rotate player
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
 
-        if (joystickHeld || heightSlider.value > -1) {
+        if ((joystickHeld || heightSlider.value > -1) && fuelGague.activeSelf) {
             fuelLevel -= fuelLossSpeed * Time.deltaTime;
         }
     }
@@ -120,7 +125,7 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(-hitboxRotations.z / 20f, 3f, -8f + hitboxRotations.x / 20f), cameraSmoothSpeed * Time.deltaTime);
     }
     private void LateUpdate() {
-        fuelGague.value = fuelLevel;
+        fuelGague.GetComponent<Slider>().value = fuelLevel;
         if (fuelLevel <= 0) {
             Debug.Log("Game Over, out of fuel!");
         }

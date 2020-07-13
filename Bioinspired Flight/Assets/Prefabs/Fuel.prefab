@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8239133718159509634}
   m_Layer: 0
   m_Name: Fuel
-  m_TagString: Loop
+  m_TagString: Fuel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63a6511512911945a7f06299f745b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1001 &2257155593465731780
 PrefabInstance:
   m_ObjectHideFlags: 0
