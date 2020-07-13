@@ -93,7 +93,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.02, y: 2, z: 1.02}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5687372438706198644
 MonoBehaviour:
@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: -3932437207975799793, guid: 4a51bb1b0ff71a845a7c2bae1570081b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7dc2628430e8cab4ea19b45b1acd6086, type: 2}
     - target: {fileID: -3008725299500856276, guid: 4a51bb1b0ff71a845a7c2bae1570081b,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -204,6 +209,21 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 8199323043920681131, guid: 4a51bb1b0ff71a845a7c2bae1570081b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7dc2628430e8cab4ea19b45b1acd6086, type: 2}
+    - target: {fileID: 8199323043920681131, guid: 4a51bb1b0ff71a845a7c2bae1570081b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d7da77b39ce82c848b3fc2081059a19e, type: 2}
+    - target: {fileID: 8199323043920681131, guid: 4a51bb1b0ff71a845a7c2bae1570081b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: fce60961fb912404dba3abf298bca810, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a51bb1b0ff71a845a7c2bae1570081b, type: 3}
 --- !u!4 &1180508546721238721 stripped
