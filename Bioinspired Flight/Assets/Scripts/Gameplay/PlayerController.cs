@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using ExtensionsMethods;
+using UnityEngine.Rendering;
+using Boo.Lang;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,27 +14,65 @@ public class PlayerController : MonoBehaviour
     public Transform hitbox;
     public Camera playerCamera;
     public PropellerBehaviour[] props;
+    public GameObject fuelGague;
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
+    public float verticalAcceleration = 2f;
+    public float fallSpeed = 3f;
     public float rotationSpeed = 1f;
     public float tiltSpeed = 90f;
     public float tiltReturnSpeed = 30f;
     public float maxTilt = 15f;
     public float cameraSmoothSpeed = 10f;
+    public float maxFuelLevel = 100f;
+    public float fuelLossSpeed = 5f;
 
+    [Header("Customisations")]
+    public bool airSensorEnabled;
+    public GameObject airSensor;
+    public bool electricalSensorEnabled;
+    public GameObject electricalSensor;
+    public bool softRoboticsGripperEnabled;
+    public GameObject softRoboticsGripper;
+    public bool magnetometerEnabled;
+    public GameObject magnetometer;
+
+    Rigidbody rb;
     bool joystickHeld;
     Vector3 hitboxRotations;
     Vector3 forces;
+    float fuelLevel = 100f;
+    GameObject[] fuels;
+
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+        if (airSensorEnabled) { airSensor.SetActive(true); }
+        if (electricalSensorEnabled) { electricalSensor.SetActive(true); }
+        if (softRoboticsGripperEnabled) { softRoboticsGripper.SetActive(true); }
+        if (magnetometerEnabled) { magnetometer.SetActive(true); }
+        fuels = GameObject.FindGameObjectsWithTag("Fuel");
+        if (fuels.Count() == 0) { fuelGague.gameObject.SetActive(false); }
+    }
 
     private void Update() { // Called once per frame
         // Receive joystick and slider values 
         forces.x = joystick.Horizontal * horizontalAcceleration;
-        forces.y = heightSlider.value * 9.81f;
+        forces.y = heightSlider.value * 9.81f * rb.mass;
         forces.z = joystick.Vertical * horizontalAcceleration;
+
+        if (forces.y > 9.81f * rb.mass) {
+            forces.y *= verticalAcceleration;
+        } else if (forces.y < 0f) {
+            forces.y *= fallSpeed;
+        }
 
         // Rotate player
         transform.Rotate(new Vector3(0f, rotationSlider.value * rotationSpeed, 0f));
+
+        if ((joystickHeld || heightSlider.value > -1) && fuelGague.activeSelf) {
+            fuelLevel -= fuelLossSpeed * Time.deltaTime;
+        }
     }
 
     private void FixedUpdate() { // Called a set number of times per second (separate from framerate)
@@ -82,6 +123,12 @@ public class PlayerController : MonoBehaviour
 
         // Offset the camera with the tilt
         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(-hitboxRotations.z / 20f, 3f, -8f + hitboxRotations.x / 20f), cameraSmoothSpeed * Time.deltaTime);
+    }
+    private void LateUpdate() {
+        fuelGague.GetComponent<Slider>().value = fuelLevel;
+        if (fuelLevel <= 0) {
+            Debug.Log("Game Over, out of fuel!");
+        }
     }
 
     #region Tilting
@@ -137,6 +184,8 @@ public class PlayerController : MonoBehaviour
         joystickHeld = b;
     }
 
+    public void informFuelCollected() {
+        fuelLevel = maxFuelLevel;
+    }
+
 }
-
-

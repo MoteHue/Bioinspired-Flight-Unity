@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Loop
   - Letter
+  - Fuel
   layers:
   - Default
   - TransparentFX
