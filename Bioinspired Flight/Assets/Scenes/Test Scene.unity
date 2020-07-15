@@ -340,6 +340,16 @@ PrefabInstance:
       propertyPath: fuelGague
       value: 
       objectReference: {fileID: 1152187199}
+    - target: {fileID: 1929358455073034060, guid: 23ad643014a5b4048bb00756b6fee603,
+        type: 3}
+      propertyPath: fuelLossSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929358455073034060, guid: 23ad643014a5b4048bb00756b6fee603,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1929358455073034061, guid: 23ad643014a5b4048bb00756b6fee603,
         type: 3}
       propertyPath: m_Interpolate
