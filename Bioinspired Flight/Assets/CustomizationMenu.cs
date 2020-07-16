@@ -20,6 +20,7 @@ public class CustomizationMenu : MonoBehaviour
 
     public void openMenu(SaveData rAchievementData, SaveData rLoadoutData, bool[] rLoadoutArray)
     {
+        // Instantiating relevant components
         achievementData = rAchievementData;
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
@@ -28,6 +29,27 @@ public class CustomizationMenu : MonoBehaviour
         turtleModel = GameObject.Find("turtle_sensor");
         hammerheadModel = GameObject.Find("hammerhead_sensor");
         octopusModel = GameObject.Find("octopus_sensor");
+
+        //Display previously saved loadout
+        if (loadoutData.data["Feathers"])
+        {
+            featherModel.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        if (loadoutData.data["Turtle"])
+        {
+            turtleModel.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        if (loadoutData.data["Hammerhead"])
+        {
+            hammerheadModel.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        if (loadoutData.data["Octopus"])
+        {
+            octopusModel.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
     public void toggleFeather()
