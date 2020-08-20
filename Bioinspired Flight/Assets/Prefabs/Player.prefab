@@ -316,6 +316,7 @@ MonoBehaviour:
   - {fileID: 347135915271282163}
   - {fileID: 6651201573676410664}
   - {fileID: 7173164782033257343}
+  fuelGague: {fileID: 0}
   horizontalAcceleration: 25
   verticalAcceleration: 2
   fallSpeed: 3
@@ -324,6 +325,8 @@ MonoBehaviour:
   tiltReturnSpeed: 0.3
   maxTilt: 15
   cameraSmoothSpeed: 10
+  maxFuelLevel: 100
+  fuelLossSpeed: 5
   airSensorEnabled: 0
   airSensor: {fileID: 1244197882798776233}
   electricalSensorEnabled: 0
@@ -1258,7 +1261,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: fce60961fb912404dba3abf298bca810, type: 2}
+      objectReference: {fileID: 2100000, guid: 52b154e75f61c1e43afa786b480248e9, type: 2}
     - target: {fileID: 1233416673737665420, guid: 4b0d4d882809de44aa13ee8f551d6ef3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

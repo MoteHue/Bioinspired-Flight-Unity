@@ -350,6 +350,16 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1929358455073034060, guid: 23ad643014a5b4048bb00756b6fee603,
+        type: 3}
+      propertyPath: gpsEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929358455073034060, guid: 23ad643014a5b4048bb00756b6fee603,
+        type: 3}
+      propertyPath: minimap
+      value: 
+      objectReference: {fileID: 1566477537}
     - target: {fileID: 1929358455073034061, guid: 23ad643014a5b4048bb00756b6fee603,
         type: 3}
       propertyPath: m_Interpolate
@@ -1025,6 +1035,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9723d34eb338c664791a0eead2841a25, type: 3}
+--- !u!1 &1566477537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5255341939007459303, guid: 9bc52dd8174d2a84f844f292ba218834,
+    type: 3}
+  m_PrefabInstance: {fileID: 4691921343743410952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1618393562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1929358455073034066, guid: 23ad643014a5b4048bb00756b6fee603,
@@ -2260,6 +2276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255341939007459303, guid: 9bc52dd8174d2a84f844f292ba218834,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6655540842871042117, guid: 9bc52dd8174d2a84f844f292ba218834,
         type: 3}

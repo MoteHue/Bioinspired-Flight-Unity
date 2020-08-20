@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public PropellerBehaviour[] props;
     public GameObject fuelGague;
+    public GameObject minimap;
 
     [Header("Player Settings")]
     public float horizontalAcceleration = 25f;
@@ -29,14 +30,16 @@ public class PlayerController : MonoBehaviour
     public float fuelLossSpeed = 5f;
 
     [Header("Customisations")]
-    public bool airSensorEnabled;
+    public bool airSensorEnabled; // Shows air streams.
     public GameObject airSensor;
-    public bool electricalSensorEnabled;
+    public bool electricalSensorEnabled; // Shows waypoints on minimap.
     public GameObject electricalSensor;
-    public bool softRoboticsGripperEnabled;
+    public bool softRoboticsGripperEnabled; // Allows picking up multiple collectibles.
     public GameObject softRoboticsGripper;
-    public bool magnetometerEnabled;
+    public bool magnetometerEnabled; // Points towards next objective.
     public GameObject magnetometer;
+    public bool camoflageSkinEnabled; // Harder to be spotted be searchlights (longer lockon time maybe?).
+    public bool gpsEnabled; // Shows minimap.
 
     Rigidbody rb;
     bool joystickHeld;
@@ -44,13 +47,17 @@ public class PlayerController : MonoBehaviour
     Vector3 forces;
     float fuelLevel = 100f;
     GameObject[] fuels;
+    SaveData loadoutData;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        if (airSensorEnabled) { airSensor.SetActive(true); }
-        if (electricalSensorEnabled) { electricalSensor.SetActive(true); }
-        if (softRoboticsGripperEnabled) { softRoboticsGripper.SetActive(true); }
-        if (magnetometerEnabled) { magnetometer.SetActive(true); }
+        loadoutData = new SaveData("Loadout.save");
+        loadoutData.Load();
+        airSensor.SetActive(loadoutData.data["Feathers"]);
+        electricalSensor.SetActive(loadoutData.data["Hammerhead"]);
+        softRoboticsGripper.SetActive(loadoutData.data["Octopus"]);
+        magnetometer.SetActive(loadoutData.data["Turtle"]);
+        minimap.SetActive(gpsEnabled);
         fuels = GameObject.FindGameObjectsWithTag("Fuel");
         if (fuels.Count() == 0) { fuelGague.gameObject.SetActive(false); }
     }
