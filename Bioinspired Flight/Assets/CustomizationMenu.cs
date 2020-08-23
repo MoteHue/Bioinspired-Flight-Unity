@@ -26,12 +26,27 @@ public class CustomizationMenu : MonoBehaviour
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
         loadoutArrayChange = new bool[4];
-        dronePreview = GameObject.Find("allAttachmentDroneTilt");
-        featherModel = GameObject.Find("seagull_sensor");
-        turtleModel = GameObject.Find("turtle_sensor");
-        hammerheadModel = GameObject.Find("hammerhead_sensor");
-        octopusModel = GameObject.Find("octopus_sensor");
-
+        dronePreview = GameObject.Find("Player Variant");
+        featherModel = dronePreview.transform.Find("HitBox/Scalar/feathers").gameObject;
+        if(featherModel == null)
+        {
+            UnityEngine.Debug.Log("Lool canne find feathers");
+        }
+        turtleModel = dronePreview.transform.Find("HitBox/Scalar/turtleSensor").gameObject;
+        if(turtleModel == null)
+        {
+            UnityEngine.Debug.Log("Nope, no turtles here");
+        }
+        hammerheadModel = dronePreview.transform.Find("HitBox/Scalar/hammerheadSensor").gameObject;
+        if(hammerheadModel == null)
+        {
+            UnityEngine.Debug.Log("Nice try, hammerheads arent real");
+        }
+        octopusModel = dronePreview.transform.Find("HitBox/Scalar/tentacleSensor").gameObject;
+        if(octopusModel == null)
+        {
+            UnityEngine.Debug.Log("Octupi are sneaky, can't find them");
+        }
         // Make loadoutArrayChange same as loadout Array
         for(int i = 0; i<loadoutArray.Length; i++)
         {
@@ -41,22 +56,22 @@ public class CustomizationMenu : MonoBehaviour
         //Display previously saved loadout
         if (loadoutData.data["Feathers"])
         {
-            featherModel.GetComponent<MeshRenderer>().enabled = true;
+            featherModel.SetActive(true);
         }
 
         if (loadoutData.data["Turtle"])
         {
-            turtleModel.GetComponent<MeshRenderer>().enabled = true;
+            turtleModel.SetActive(true);
         }
 
         if (loadoutData.data["Hammerhead"])
         {
-            hammerheadModel.GetComponent<MeshRenderer>().enabled = true;
+            hammerheadModel.SetActive(true);
         }
 
         if (loadoutData.data["Octopus"])
         {
-            octopusModel.GetComponent<MeshRenderer>().enabled = true;
+            octopusModel.SetActive(true);
         }
     }
 
@@ -75,7 +90,7 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArrayChange[0] = true;
         }
 
-        featherModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[0];
+        featherModel.SetActive(loadoutArrayChange[0]);
     }
 
     public void toggleTurtle()
@@ -93,7 +108,7 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArrayChange[1] = true;
         }
 
-        turtleModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[1];
+        turtleModel.SetActive(loadoutArrayChange[1]);
     }
 
     public void toggleHammerhead()
@@ -111,7 +126,7 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArrayChange[2] = true;
         }
 
-        hammerheadModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[2];
+        hammerheadModel.SetActive(loadoutArrayChange[2]);
     }
 
     public void toggleOctopus()
@@ -129,7 +144,7 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArrayChange[3] = true;
         }
 
-        octopusModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[3];
+        octopusModel.SetActive(loadoutArrayChange[3]);
     }
 
 
