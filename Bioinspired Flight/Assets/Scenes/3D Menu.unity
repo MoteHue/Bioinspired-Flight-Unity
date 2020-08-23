@@ -2315,7 +2315,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1751314444}
-        m_MethodName: toggleTurtleNew
+        m_MethodName: toggleTurtle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8135,7 +8135,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1751314444}
-        m_MethodName: toggleHammerheadNew
+        m_MethodName: toggleHammerhead
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8364,7 +8364,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1751314444}
-        m_MethodName: toggleOctopusNew
+        m_MethodName: toggleOctopus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8663,7 +8663,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1751314444}
-        m_MethodName: toggleFeatherNew
+        m_MethodName: toggleFeather
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
