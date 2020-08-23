@@ -12,6 +12,7 @@ public class CustomizationMenu : MonoBehaviour
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray;
+    private bool[] loadoutArrayChange;
     private GameObject dronePreview;
     private GameObject featherModel;
     private GameObject turtleModel;
@@ -24,11 +25,18 @@ public class CustomizationMenu : MonoBehaviour
         achievementData = rAchievementData;
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
+        loadoutArrayChange = new bool[4];
         dronePreview = GameObject.Find("allAttachmentDroneTilt");
         featherModel = GameObject.Find("seagull_sensor");
         turtleModel = GameObject.Find("turtle_sensor");
         hammerheadModel = GameObject.Find("hammerhead_sensor");
         octopusModel = GameObject.Find("octopus_sensor");
+
+        // Make loadoutArrayChange same as loadout Array
+        for(int i = 0; i<loadoutArray.Length; i++)
+        {
+            loadoutArrayChange[i] = loadoutArray[i];
+        }
 
         //Display previously saved loadout
         if (loadoutData.data["Feathers"])
@@ -54,106 +62,91 @@ public class CustomizationMenu : MonoBehaviour
 
     public void toggleFeather()
     {
-        
-        bool featherStatus = loadoutData.data["Feathers"];
-        UnityEngine.Debug.Log("Changing Feather from");
-        UnityEngine.Debug.Log(featherStatus);
-        UnityEngine.Debug.Log("To:");
+        bool featherStatus = loadoutArrayChange[0]; 
+
         if (featherStatus)
         {
-            loadoutData.data["Feathers"] = false;
-            featherStatus = loadoutData.data["Feathers"];
-            loadoutArray[0] = featherStatus;
-
+            featherStatus = false;
+            loadoutArrayChange[0] = false;
         }
         else
         {
-            loadoutData.data["Feathers"] = true;
-            featherStatus = loadoutData.data["Feathers"];
-            loadoutArray[0] = featherStatus;
+            featherStatus = true;
+            loadoutArrayChange[0] = true;
         }
-        UnityEngine.Debug.Log(featherStatus);
-        UnityEngine.Debug.Log("Saving Feather change");
-    
-        loadoutData.Save();
-        featherModel.GetComponent<MeshRenderer>().enabled = loadoutArray[0];
+
+        featherModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[0];
     }
 
     public void toggleTurtle()
     {
-        bool turtleStatus = loadoutData.data["Turtle"];
-        UnityEngine.Debug.Log("Changing Turtle from");
-        UnityEngine.Debug.Log(turtleStatus);
-        UnityEngine.Debug.Log("To:");
+        bool turtleStatus = loadoutArrayChange[1];
+
         if (turtleStatus)
         {
-            loadoutData.data["Turtle"] = false;
-            turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[1] = turtleStatus;
-
+            turtleStatus = false;
+            loadoutArrayChange[1] = false;
         }
         else
         {
-            loadoutData.data["Turtle"] = true;
-            turtleStatus = loadoutData.data["Turtle"];
-            loadoutArray[1] = turtleStatus;
+            turtleStatus = true;
+            loadoutArrayChange[1] = true;
         }
-        UnityEngine.Debug.Log(turtleStatus);
-        UnityEngine.Debug.Log("Saving Turtle change");
-        loadoutData.Save();
-        turtleModel.GetComponent<MeshRenderer>().enabled = loadoutArray[1];
+
+        turtleModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[1];
     }
 
     public void toggleHammerhead()
     {
-        bool hammerheadStatus = loadoutData.data["Hammerhead"];
-        UnityEngine.Debug.Log("Changing Hammerhead from");
-        UnityEngine.Debug.Log(hammerheadStatus);
-        UnityEngine.Debug.Log("To:");
+        bool hammerheadStatus = loadoutArrayChange[2];
+
         if (hammerheadStatus)
         {
-            loadoutData.data["Hammerhead"] = false;
-            hammerheadStatus = loadoutData.data["Hammerhead"];
-            loadoutArray[2] = hammerheadStatus;
-
+            hammerheadStatus = false;
+            loadoutArrayChange[2] = false;
         }
         else
         {
-            loadoutData.data["Hammerhead"] = true;
-            hammerheadStatus = loadoutData.data["Hammerhead"];
-            loadoutArray[2] = hammerheadStatus;
+            hammerheadStatus = true;
+            loadoutArrayChange[2] = true;
         }
-        UnityEngine.Debug.Log(hammerheadStatus);
-        UnityEngine.Debug.Log("Saving Hammerhead change");
-        loadoutData.Save();
-        hammerheadModel.GetComponent<MeshRenderer>().enabled = loadoutArray[2];
+
+        hammerheadModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[2];
     }
 
     public void toggleOctopus()
     {
-        bool octopusStatus = loadoutData.data["Octopus"];
-        UnityEngine.Debug.Log("Changing Octopus from");
-        UnityEngine.Debug.Log(octopusStatus);
-        UnityEngine.Debug.Log("To:");
+        bool octopusStatus = loadoutArrayChange[3];
+
         if (octopusStatus)
         {
-            loadoutData.data["Octopus"] = false;
-            octopusStatus = loadoutData.data["Octopus"];
-            loadoutArray[3] = octopusStatus;
-
+            octopusStatus = false;
+            loadoutArrayChange[3] = false;
         }
         else
         {
-            loadoutData.data["Octopus"] = true;
-            octopusStatus = loadoutData.data["Octopus"];
-            loadoutArray[3] = octopusStatus;
+            octopusStatus = true;
+            loadoutArrayChange[3] = true;
         }
-        UnityEngine.Debug.Log(octopusStatus);
-        UnityEngine.Debug.Log("Saving Octopus change");
-        loadoutData.Save();
-        octopusModel.GetComponent<MeshRenderer>().enabled = loadoutArray[3];
+
+        octopusModel.GetComponent<MeshRenderer>().enabled = loadoutArrayChange[3];
     }
 
+
+    public void saveButton()
+    {
+        for (int a = 0; a < loadoutArrayChange.Length; a++)
+        {
+            loadoutArray[a] = loadoutArrayChange[a];
+        }
+
+        loadoutData.data["Feathers"] = loadoutArray[0];
+        loadoutData.data["Turtle"] = loadoutArray[1];
+        loadoutData.data["Hammerhead"] = loadoutArray[2];
+        loadoutData.data["Octopus"] = loadoutArray[3];
+
+        loadoutData.Save();
+    }
 
     public void checkLoadout()
     {
