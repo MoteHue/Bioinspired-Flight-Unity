@@ -26,7 +26,13 @@ public class CustomizationMenu : MonoBehaviour
         loadoutData = rLoadoutData;
         loadoutArray = rLoadoutArray;
         loadoutArrayChange = new bool[4];
+
+        // Checking objects are found
         dronePreview = GameObject.Find("Player Variant");
+        if(dronePreview == null)
+        {
+            UnityEngine.Debug.Log("Soz too broke to afford a drone prefab");
+        }
         featherModel = dronePreview.transform.Find("HitBox/Scalar/feathers").gameObject;
         if(featherModel == null)
         {
@@ -53,25 +59,41 @@ public class CustomizationMenu : MonoBehaviour
             loadoutArrayChange[i] = loadoutArray[i];
         }
 
-        //Display previously saved loadout
+        //Display previously saved loadout ONLY
         if (loadoutData.data["Feathers"])
         {
             featherModel.SetActive(true);
+        }
+        else
+        {
+            featherModel.SetActive(false);
         }
 
         if (loadoutData.data["Turtle"])
         {
             turtleModel.SetActive(true);
         }
+        else
+        {
+            turtleModel.SetActive(false);
+        }
 
         if (loadoutData.data["Hammerhead"])
         {
             hammerheadModel.SetActive(true);
         }
+        else
+        {
+            hammerheadModel.SetActive(false);
+        }
 
         if (loadoutData.data["Octopus"])
         {
             octopusModel.SetActive(true);
+        }
+        else
+        {
+            octopusModel.SetActive(false);
         }
     }
 
