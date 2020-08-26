@@ -7,8 +7,14 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class CustomizationMenu : MonoBehaviour
 {
+    [SerializeField] List<Button> attachmentButtons = new List<Button>();
+    [SerializeField] List<bool> unlockedAttachments = new List<bool>();
+
+
     private SaveData achievementData;
     private SaveData loadoutData;
     private bool[] loadoutArray;
@@ -19,8 +25,14 @@ public class CustomizationMenu : MonoBehaviour
     private GameObject hammerheadModel;
     private GameObject octopusModel;
 
+    public Button getButtonFromIndex(int i)
+    {
+        return attachmentButtons[i];
+    }
+
     public void openMenu(SaveData rAchievementData, SaveData rLoadoutData, bool[] rLoadoutArray)
     {
+
         // Instantiating relevant components
         achievementData = rAchievementData;
         loadoutData = rLoadoutData;
@@ -53,6 +65,7 @@ public class CustomizationMenu : MonoBehaviour
         {
             UnityEngine.Debug.Log("Octupi are sneaky, can't find them");
         }
+
         // Make loadoutArrayChange same as loadout Array
         for(int i = 0; i<loadoutArray.Length; i++)
         {
@@ -95,7 +108,33 @@ public class CustomizationMenu : MonoBehaviour
         {
             octopusModel.SetActive(false);
         }
+
+        // Unlock Attachments Unlocked
+        for (int i = 0; i < unlockedAttachments.Count; i++)
+        {
+            if(unlockedAttachments[i] == true)
+            {
+                Button currentAttachment = getButtonFromIndex(i);
+                GameObject lockedButton = currentAttachment.transform.Find("Locked").gameObject;
+                GameObject equipButton = currentAttachment.transform.Find("Equip").gameObject;
+                lockedButton.SetActive(false);
+                equipButton.SetActive(true);
+            }
+            else
+            {
+                Button currentAttachment = getButtonFromIndex(i);
+                GameObject lockedButton = currentAttachment.transform.Find("Locked").gameObject;
+                GameObject equipButton = currentAttachment.transform.Find("Equip").gameObject;
+                lockedButton.SetActive(true);
+                equipButton.SetActive(false);
+            }
+        }
+
     }
+
+
+
+
 
     public void toggleFeather()
     {
